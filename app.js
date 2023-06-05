@@ -58,7 +58,6 @@ function checkKey(e) {
   if (e.key === "ArrowUp") {
     // Up
     gameState.shieldDirection = "up";
-    console.log(upShield);
     upShield.style.backgroundColor = "black";
     downShield.style.removeProperty("background-color");
     leftShield.style.removeProperty("background-color");
