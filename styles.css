@@ -1,0 +1,48 @@
+#game-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#game-display {
+  height: 40rem;
+  width: 40.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.cell {
+  height: 0.5rem;
+  width: 0.5rem;
+}
+
+.box-separator {
+  height: 19.75rem;
+  width: 19.75rem;
+}
+
+#hero {
+  height: 0.5rem;
+  width: 0.5rem;
+  background-color: red;
+}
+
+#game-display {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#top-projectiles {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+#left-projectiles {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+#right-projectiles {
+  display: flex;
+}
