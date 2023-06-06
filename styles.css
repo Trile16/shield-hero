@@ -17,6 +17,8 @@ html {
   width: 50rem;
   height: 60rem;
   background-color: gray;
+  border: 0.2rem solid black;
+  border-radius: 10%;
 }
 
 #game-title {
@@ -36,6 +38,7 @@ html {
   justify-content: center;
   align-items: center;
   outline: solid 1px black;
+  border-radius: 10%;
 }
 
 .cell {
@@ -52,6 +55,7 @@ html {
   height: 0.5rem;
   width: 0.5rem;
   background-color: black;
+  border-radius: 100%;
 }
 
 #game-display {
