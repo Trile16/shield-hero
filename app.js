@@ -58,28 +58,28 @@ function checkKey(e) {
   if (e.key === "ArrowUp") {
     // Up
     gameState.shieldDirection = "up";
-    upShield.style.backgroundColor = "black";
+    upShield.style.backgroundColor = "gold";
     downShield.style.removeProperty("background-color");
     leftShield.style.removeProperty("background-color");
     rightShield.style.removeProperty("background-color");
   } else if (e.key === "ArrowDown") {
     // Down
     gameState.shieldDirection = "down";
-    downShield.style.backgroundColor = "black";
+    downShield.style.backgroundColor = "gold";
     upShield.style.removeProperty("background-color");
     leftShield.style.removeProperty("background-color");
     rightShield.style.removeProperty("background-color");
   } else if (e.key === "ArrowLeft") {
     // Left
     gameState.shieldDirection = "left";
-    leftShield.style.backgroundColor = "black";
+    leftShield.style.backgroundColor = "gold";
     downShield.style.removeProperty("background-color");
     upShield.style.removeProperty("background-color");
     rightShield.style.removeProperty("background-color");
   } else if (e.key === "ArrowRight") {
     // Right
     gameState.shieldDirection = "right";
-    rightShield.style.backgroundColor = "black";
+    rightShield.style.backgroundColor = "gold";
     downShield.style.removeProperty("background-color");
     leftShield.style.removeProperty("background-color");
     upShield.style.removeProperty("background-color");
@@ -89,6 +89,7 @@ function checkKey(e) {
 // Produces cells for projectiles to flow
 function renderProjectileAreas() {
   for (let i = 0; i < 40; i++) {
+    //Rendering cells for top projectile flow
     const cell = document.createElement("div");
     cell.setAttribute("class", "cell");
     cell.setAttribute("id", `top-${i}`);
@@ -148,7 +149,7 @@ function gameReset() {
   }
 
   const leftShield = document.getElementById("left-2");
-  leftShield.style.backgroundColor = "black";
+  leftShield.style.backgroundColor = "gold";
 }
 
 // Game Flow
@@ -201,7 +202,7 @@ setInterval(() => {
         score.innerHTML = `Score: ${gameState.score}`;
 
         const upShield = document.getElementById("top-2");
-        upShield.style.backgroundColor = "black";
+        upShield.style.backgroundColor = "gold";
       } else {
         gameState.topProjectilesArray[i]--;
         const cell2 = document.getElementById(
@@ -231,7 +232,7 @@ setInterval(() => {
         score.innerHTML = `Score: ${gameState.score}`;
 
         const leftShield = document.getElementById("left-2");
-        leftShield.style.backgroundColor = "black";
+        leftShield.style.backgroundColor = "gold";
       } else {
         gameState.leftProjectilesArray[i]--;
         const cell2 = document.getElementById(
@@ -261,7 +262,7 @@ setInterval(() => {
         score.innerHTML = `Score: ${gameState.score}`;
 
         const rightShield = document.getElementById("right-2");
-        rightShield.style.backgroundColor = "black";
+        rightShield.style.backgroundColor = "gold";
       } else {
         gameState.rightProjectilesArray[i]--;
 
@@ -294,7 +295,7 @@ setInterval(() => {
         score.innerHTML = `Score: ${gameState.score}`;
 
         const downShield = document.getElementById("bottom-2");
-        downShield.style.backgroundColor = "black";
+        downShield.style.backgroundColor = "gold";
       } else {
         gameState.bottomProjectilesArray[i]--;
 
