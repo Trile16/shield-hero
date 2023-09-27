@@ -9,6 +9,7 @@ let gameState = {
   rightProjectilesArray: [],
   bottomProjectilesArray: [],
   shieldDirection: "left",
+  isMuted: false,
 };
 
 // DOM
@@ -19,6 +20,17 @@ const bottomProjectiles = document.getElementById("bottom-projectiles");
 const leftShield = document.getElementById("left-2");
 const score = document.getElementById("current-score");
 const highScore = document.getElementById("high-score");
+const mute = document.getElementById("mute");
+const unmute = document.getElementById("unmute");
+unmute.style.display = "none";
+
+// Audio
+
+const gameOver = new Audio("./assets/gameover.wav");
+const cNote = new Audio("./assets/sax-short-single-note_C.wav");
+const dNote = new Audio("./assets/sax-short-single-note_D.wav");
+const eNote = new Audio("./assets/sax-short-single-note_E.wav");
+const gNote = new Audio("./assets/sax-short-single-note_G.wav");
 
 // Checking high score from localStorage
 
@@ -31,6 +43,19 @@ if (checkStateHighScore) {
 
 // Event Listeners
 document.addEventListener("keydown", checkKey);
+mute.addEventListener("click", () => {
+  mute.style.display = "none";
+  gameState.isMuted = true;
+  console.log(gameState.isMuted);
+  unmute.style.removeProperty("display");
+});
+
+unmute.addEventListener("click", () => {
+  gameState.isMuted = false;
+  console.log(gameState.isMuted);
+  unmute.style.display = "none";
+  mute.style.removeProperty("display");
+});
 
 // allows for web page to not move on key click
 
@@ -120,6 +145,8 @@ gameReset();
 
 // Game Reset Functionality
 function gameReset() {
+  const isMuted = gameState.isMuted;
+
   gameState = {
     score: 0,
     highScore: localStorage.getItem("shieldHeroHighScore"),
@@ -130,6 +157,7 @@ function gameReset() {
     rightProjectilesArray: [],
     bottomProjectilesArray: [],
     shieldDirection: "left",
+    isMuted,
   };
 
   score.innerHTML = "Score: 0";
@@ -190,6 +218,11 @@ setInterval(() => {
       );
       cell.style.removeProperty("background-color");
       if (gameState.topProjectilesArray[i] === 0) {
+        if (!gameState.isMuted) {
+          let gameOverClone = gameOver.cloneNode();
+          gameOverClone.volume = 0.1;
+          gameOverClone.play();
+        }
         gameReset();
         break;
       } else if (
@@ -200,6 +233,12 @@ setInterval(() => {
         gameState.score += 1;
         i--;
         score.innerHTML = `Score: ${gameState.score}`;
+
+        if (!gameState.isMuted) {
+          let cClone = cNote.cloneNode();
+          cClone.volume = 0.05;
+          cClone.play();
+        }
 
         const upShield = document.getElementById("top-2");
         upShield.style.backgroundColor = "gold";
@@ -221,6 +260,11 @@ setInterval(() => {
       cell.style.removeProperty("background-color");
       if (gameState.leftProjectilesArray[i] === 0) {
         gameReset();
+        if (!gameState.isMuted) {
+          let gameOverClone = gameOver.cloneNode();
+          gameOverClone.volume = 0.1;
+          gameOverClone.play();
+        }
         break;
       } else if (
         gameState.leftProjectilesArray[i] === 2 &&
@@ -230,6 +274,12 @@ setInterval(() => {
         gameState.score += 1;
         i--;
         score.innerHTML = `Score: ${gameState.score}`;
+
+        if (!gameState.isMuted) {
+          let dClone = dNote.cloneNode();
+          dClone.volume = 0.05;
+          dClone.play();
+        }
 
         const leftShield = document.getElementById("left-2");
         leftShield.style.backgroundColor = "gold";
@@ -251,6 +301,11 @@ setInterval(() => {
       cell.style.removeProperty("background-color");
       if (gameState.rightProjectilesArray[i] === 0) {
         gameReset();
+        if (!gameState.isMuted) {
+          let gameOverClone = gameOver.cloneNode();
+          gameOverClone.volume = 0.1;
+          gameOverClone.play();
+        }
         break;
       } else if (
         gameState.rightProjectilesArray[i] === 2 &&
@@ -259,6 +314,13 @@ setInterval(() => {
         gameState.rightProjectilesArray.shift();
         gameState.score += 1;
         i--;
+
+        if (!gameState.isMuted) {
+          let eClone = eNote.cloneNode();
+          eClone.volume = 0.05;
+          eClone.play();
+        }
+
         score.innerHTML = `Score: ${gameState.score}`;
 
         const rightShield = document.getElementById("right-2");
@@ -283,6 +345,11 @@ setInterval(() => {
       cell.style.removeProperty("background-color");
       if (gameState.bottomProjectilesArray[i] === 0) {
         gameReset();
+        if (!gameState.isMuted) {
+          let gameOverClone = gameOver.cloneNode();
+          gameOverClone.volume = 0.1;
+          gameOverClone.play();
+        }
         break;
       } else if (
         gameState.bottomProjectilesArray[i] === 2 &&
@@ -291,6 +358,12 @@ setInterval(() => {
         gameState.bottomProjectilesArray.shift();
         gameState.score += 1;
         i--;
+
+        if (!gameState.isMuted) {
+          let gClone = gNote.cloneNode();
+          gClone.volume = 0.05;
+          gClone.play();
+        }
 
         score.innerHTML = `Score: ${gameState.score}`;
 
@@ -309,7 +382,6 @@ setInterval(() => {
 
   if (gameState.score > gameState.highScore) {
     gameState.highScore = gameState.score;
-    console.log(gameState.highScore);
     highScore.innerHTML = `High Score: ${gameState.highScore}`;
     localStorage.setItem("shieldHeroHighScore", gameState.highScore);
   }
